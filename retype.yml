@@ -3,10 +3,17 @@ output: .retype
 url: # Add your website address here
 branding:
   title: Dragonfly
-  label: Wiki
+  label: v0.10.2
   logo: static/logo.png
+  colors:
+    label:
+      background: "#91d0f9"
 links:
-- text: Getting Started
-  link: https://retype.com/guides/getting-started/
+- text: GitHub
+  icon: mark-github
+  link: https://github.com/df-mc/dragonfly
+- text: Discord
+  icon: comment-discussion
+  link: https://discord.gg/U4kFWHhTNR
 footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."

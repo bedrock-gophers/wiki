@@ -1,3 +1,6 @@
+---
+icon: home
+---
 Welcome to the Dragonfly wiki.
 
 This wiki is the main source of information for developers looking to start developing servers and libraries 
