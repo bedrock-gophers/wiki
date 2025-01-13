@@ -1,7 +1,6 @@
 ---
 icon: repo
 ---
-## Language
 
 If you are a developer from softwares like Pocketmine-MP and Nukkit, you are primarily used to programming in an Object-Oriented Programming (OOP) Language (e.g PHP, Java, Kotlin).
 
