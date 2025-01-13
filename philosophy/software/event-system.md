@@ -9,14 +9,41 @@ Dragonfly does not have a traditional event handling system, instead a per-playe
 If this is confusing to you, below are diagrams that may help you better you discern the differences between the typical event system you are used to in softwares like Pocketmine-MP/Nukkit and Dragonfly.
 
 ## Typical Event System (Pocketmine-MP/Nukkit)
-![](/static/typical-event-system.png)
+```mermaid
+%%{init: { 'theme': 'neutral' }}%%
+flowchart LR
+    A(Player) -->|"Performs Action (e.g attack, chat, move)\n\n"| B[/Server Event Handler/]
+    B -."Internal Response\n\n(e.g update row)".-> C[("Database")]
+    B -."\nExternal Reponse (e.g message, teleport)".-> A
+```
+<!-- ![](/static/typical-event-system.png) -->
 
 In the diagram, you can see that for every action a player does (e.g chat, move, swing, etc.), it is handled by a single global (or conglomerate of multiple) handler that does not change for every player.
 
 Simply put, the server is just handling events from the player and there is no dynamic behavior for different handling unless its specifically branched off in your listener.
 
 ## Per-Player Event System (Dragonfly)
-![](/static/per-player-event-system.png)
+```mermaid
+%%{init: { 'theme': 'neutral' }}%%
+flowchart LR
+    P1(Player 1) -->|"Use lobby item\n\n"| H1[/Lobby Handler/]
+    H1 -."\nOpen lobby-specific form".-> P1
+
+    P2(Player 2) -->|"Eliminate player in arena\n\n"| H2[/Arena Handler/]
+    H2 -."\nAnnounce elimination in chat".-> P2
+    
+    P3(Player 3) -->|"Eliminate player in duel\n\n"| H3[/Duel Handler/]
+    H3 -."\nTeleport player back to lobby".-> P3
+
+    P4(Player 3) -->|"Dies player in duel\n\n"| H4[/Duel Handler/]
+    H4 -."\nTeleport player back to lobby".-> P4
+
+    H1 -."Internal Response (e.g update stats)\n\n".-> C[("Database")]
+    H2 -."Internal Response\n(e.g update user stats)".-> C[("Database")]
+    H3 -."Internal Response\n(e.g update user stats)".-> C[("Database")]
+    H4 -."Internal Response (update user stats)\n\n".-> C[("Database")]
+```
+<!-- ![](/static/per-player-event-system.png) -->
 
 In the diagram, you can see that there are multiple players in this example, some with different or the same handlers. Each handler is actually mounted onto the player as a field (think of making an `eventHandler` field of type `EventHandler` in Pocketmine-MP/Nukkit) and runs each event of the handler in it's own Go routine (green thread).
 

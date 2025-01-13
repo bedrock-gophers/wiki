@@ -1,6 +1,7 @@
 input: .
 output: .retype
-url: # Add your website address here
+url: https://discord.gg/U4kFWHhTNR
+
 branding:
   title: Dragonfly
   label: v0.10.2
@@ -8,6 +9,7 @@ branding:
   colors:
     label:
       background: "#91d0f9"
+
 links:
 - text: GitHub
   icon: mark-github
@@ -15,5 +17,11 @@ links:
 - text: Discord
   icon: comment-discussion
   link: https://discord.gg/U4kFWHhTNR
+favicon: static/logo.png
+
+search:
+  hotkeys:
+    - "/"
+
 footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."
